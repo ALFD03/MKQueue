@@ -11,7 +11,7 @@ sys.path.insert(0, app_root)
 import flet as ft
 from Styles import styles
 
-#? Pagina de Login
+#! Pagina de Login
 def Login(page: ft.Page):
     #* Estilos de la pagina
     page.theme_mode = ft.ThemeMode.LIGHT
@@ -27,18 +27,21 @@ def Login(page: ft.Page):
     page.title = "MKQueue - Login"
 
     #* Controles de la pagina
+    #? Cuadro de texto para el usuario
     Username = styles.Login_textfield(
         label = "Username",
         hint_text = "Enter your username",
         autofocus = True,
     )
 
+    #? cuadro de texto para la contraseña
     Password = styles.Login_textfield(
         label = "Password",
         password = True,
         can_reveal_password = True,
     )
 
+    #? Formulario de inicio de sesion
     Form_login = ft.Container(
         content=ft.Column(
             controls=[
@@ -60,7 +63,7 @@ def Login(page: ft.Page):
         border_radius=ft.border_radius.all(10),
         border=ft.border.all(1, color='#e8e8e8')
     )
-
+    #* Limpieza de la pagina y adición de controles
     page.clean()
     page.add(
         ft.Container(
@@ -71,5 +74,6 @@ def Login(page: ft.Page):
         ),
     )
 
+#! Ejecutar la aplicacion siempre que se ejecute desde este archivo
 if __name__ == "__main__":
     ft.app(target=Login)
