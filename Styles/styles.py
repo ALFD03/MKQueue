@@ -1,5 +1,6 @@
 #MKQueue/Styles/styles.py
 
+#! Importaciones
 import sys
 import os
 
@@ -9,6 +10,7 @@ sys.path.insert(0, app_root)
 
 import flet as ft
 
+#! Estilo de Boton predeterminado Principal
 Primary_Button = ft.ButtonStyle(
     color= ft.Colors.WHITE,
     bgcolor= '#1098f7',
@@ -22,6 +24,7 @@ Primary_Button = ft.ButtonStyle(
     )
 )
 
+#! Estilo de Campo de texto para el Login
 class Login_textfield(ft.TextField):
     def __init__(self, **kwargs):
         super().__init__(
