@@ -11,7 +11,9 @@ sys.path.insert(0, app_root)
 import flet as ft
 from Styles import styles
 
+#! Definicion de los destinos de la barra de navegacion
 
+#? Destino del Dashboard
 Dashboard = ft. NavigationRailDestination(
     label_content= ft.Text(
         "Dashboard",
@@ -26,6 +28,7 @@ Dashboard = ft. NavigationRailDestination(
     ),
 )
 
+#? Destino del Queue Tree
 Queue_Tree = ft.NavigationRailDestination(
     label_content= ft.Text(
         "Queue Tree",
@@ -34,12 +37,13 @@ Queue_Tree = ft.NavigationRailDestination(
     ),
     icon= ft.Image(
         src= "Recursos/Iconos/QueueTreeIcon.png",
-        width= 50,
-        height= 50,
+        width= 30,
+        height= 30,
         fit= ft.ImageFit.CONTAIN,
     ),
 )
 
+#? Destino del Queue Type
 Queue_type = ft.NavigationRailDestination(
     label_content= ft.Text(
         "Queue Type",
@@ -55,6 +59,7 @@ Queue_type = ft.NavigationRailDestination(
     ),
 )
 
+#? Destino del Router
 Router = ft.NavigationRailDestination(
     label_content= ft.Text(
         "Router",
@@ -69,6 +74,7 @@ Router = ft.NavigationRailDestination(
     ),
 )
 
+#? Destino de Configuraciones
 Settings = ft.NavigationRailDestination(
     label_content= ft.Text(
         "Configuration",
