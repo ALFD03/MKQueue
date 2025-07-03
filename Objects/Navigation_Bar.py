@@ -89,7 +89,14 @@ Navigation_Bar = ft.NavigationRail(
     extended= True,
     width= 300,
     height= 900,
-    leading= ft.Text("MKQueue", size= 20, weight= ft.FontWeight.W_900, color= ft.Colors.BLACK),
+    leading= ft.Column(
+        [
+            ft.Divider(height=10, color= ft.Colors.TRANSPARENT),
+            ft.Text("MKQueue", size= 20, weight= ft.FontWeight.W_900, color= ft.Colors.BLACK),
+            ft.Divider(height=10, color= ft.Colors.TRANSPARENT),
+        ],
+        horizontal_alignment= ft.CrossAxisAlignment.CENTER,
+    ),
     bgcolor= "#f5eeee",
     destinations= [
         Dashboard,
