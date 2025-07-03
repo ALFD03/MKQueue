@@ -18,8 +18,7 @@ Primary_Button = ft.ButtonStyle(
     alignment= ft.alignment.center,
     shape= ft.RoundedRectangleBorder(radius= ft.border_radius.all(10)),
     text_style= ft.TextStyle(
-        weight= ft.FontWeight.W_900,
-        italic= True,
+        weight= ft.FontWeight.W_700,
         size= 16,
     )
 )
@@ -56,13 +55,13 @@ class Login_textfield(ft.TextField):
 Page_Title = ft.TextStyle(
     color= ft.Colors.BLACK,
     weight= ft.FontWeight.W_900,
-    size= 30,
+    size= 22,
     italic= True,
 )
 
 Values_Style = ft.TextStyle(
     color= ft.Colors.BLACK,
-    size= 20,
+    size= 18,
     weight= ft.FontWeight.W_800,
 )
 
@@ -75,7 +74,7 @@ ContainerLabel_style = ft.TextStyle(
 Page_Subtitle = ft.TextStyle(
     color= ft.Colors.BLACK,
     weight= ft.FontWeight.W_700,
-    size= 26,
+    size= 20,
     )
 
 class ContainerStyle1(ft.Container):
