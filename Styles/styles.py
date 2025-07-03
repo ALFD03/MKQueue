@@ -51,3 +51,53 @@ class Login_textfield(ft.TextField):
             ),
             **kwargs
         )
+
+#! Estilo de Texto para el Titulo de la pagina
+Page_Title = ft.TextStyle(
+    color= ft.Colors.BLACK,
+    weight= ft.FontWeight.W_900,
+    size= 30,
+    italic= True,
+)
+
+Values_Style = ft.TextStyle(
+    color= ft.Colors.BLACK,
+    size= 20,
+    weight= ft.FontWeight.W_800,
+)
+
+ContainerLabel_style = ft.TextStyle(
+    color= "#858585",
+    size= 16,
+    weight= ft.FontWeight.W_500,
+)
+
+Page_Subtitle = ft.TextStyle(
+    color= ft.Colors.BLACK,
+    weight= ft.FontWeight.W_700,
+    size= 26,
+    )
+
+class ContainerStyle1(ft.Container):
+    def __init__(self, **kwargs):
+        super().__init__(
+            width= 280,
+            height= 200,
+            bgcolor= "#FBFAF9",
+            border_radius= ft.border_radius.all(10),
+            border= ft.border.all(2, "#EDEDED"),
+            padding=ft.padding.all(10),
+            **kwargs
+        )
+
+class ContainerStyles2(ft.Container):
+    def __init__(self, **kwargs):
+        super().__init__(
+            width= 900,
+            height= 500,
+            bgcolor= "#FBFAF9",
+            border_radius= ft.border_radius.all(10),
+            border= ft.border.all(2, "#EDEDED"),
+            padding=ft.padding.all(10),
+            **kwargs
+            )
