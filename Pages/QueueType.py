@@ -12,7 +12,7 @@ import flet as ft
 from Objects import Navigation_Bar
 from Styles import styles
 
-#! Pagina del Arbol de Colas
+#! Pagina de Tipos de Colas
 def QueueType(page: ft.Page):
     #* Estilos de la pagina
     page.theme_mode = ft.ThemeMode.LIGHT
