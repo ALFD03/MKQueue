@@ -13,7 +13,7 @@ from Objects import Navigation_Bar
 from Styles import styles
 
 #! Pagina del Arbol de Colas
-def QueueTree(page: ft.Page):
+def QueueType(page: ft.Page):
     #* Estilos de la pagina
     page.theme_mode = ft.ThemeMode.LIGHT
     page.bgcolor = '#FFFFFF'
@@ -94,4 +94,4 @@ def QueueTree(page: ft.Page):
 
 #! Ejecutar la aplicacion siempre que se ejecute desde este archivo
 if __name__ == "__main__":
-    ft.app(QueueTree)
+    ft.app(QueueType)
