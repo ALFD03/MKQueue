@@ -30,7 +30,7 @@ def QueueType(page: ft.Page):
 
     #* Controles de la pagina
 
-    #? Boton para cargar un archivo
+    #? Boton para agregar una nueva cola
     Add_New_Queue_type = ft.ElevatedButton(
         style=styles.Primary_Button,
         text= "Add New Queue Type",
