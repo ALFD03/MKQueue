@@ -17,7 +17,7 @@ def QueueType(page: ft.Page):
     #* Estilos de la pagina
     page.theme_mode = ft.ThemeMode.LIGHT
     page.bgcolor = '#FFFFFF'
-    page.window.width = ft.Window.width
+    page.window.width = 1600
     page.window.height = 900
     page.window.resizable = False
     page.window.maximizable = False
