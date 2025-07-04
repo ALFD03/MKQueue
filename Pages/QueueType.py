@@ -41,13 +41,9 @@ def QueueType(page: ft.Page):
     )
 
     #? Contenedor para Lista de Colas
-    Queue_Type_List_Container = ft.Container(
-        width= 900,
+    Queue_Type_List_Container = styles.ContainerStyle(
+        width= 1190,
         height= 700,
-        bgcolor= "#FBFAF9",
-        border_radius= ft.border_radius.all(10),
-        border= ft.border.all(2, "#EDEDED"),
-        padding=ft.padding.all(10),
         content=ft.Column(
             [
                 ft.Divider(height=10, color= ft.Colors.TRANSPARENT),
@@ -78,7 +74,7 @@ def QueueType(page: ft.Page):
                         ft.Row(
                             controls=[
                                 ft.Text("Queue Type Management",style=styles.Page_Title, width= 200),
-                                ft.VerticalDivider(width=520, color= ft.Colors.TRANSPARENT),
+                                ft.VerticalDivider(width=808, color= ft.Colors.TRANSPARENT),
                                 Add_New_Queue_type,
                             ],
                         ),

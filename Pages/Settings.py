@@ -77,11 +77,7 @@ def Settings(page: ft.Page):
     )
 
     #? Contenedor para formulario de Datos de Usuario Actual
-    Current_User_Data_Container = ft.Container(
-        bgcolor= "#FBFAF9",
-        border_radius= ft.border_radius.all(10),
-        border= ft.border.all(2, "#EDEDED"),
-        padding=ft.padding.all(10),
+    Current_User_Data_Container = styles.ContainerStyle(
         width= 1200,
         content=ft.Column([
             ft.Text("Current User Data", style=styles.Page_Subtitle),
@@ -105,11 +101,7 @@ def Settings(page: ft.Page):
         icon= ft.Icons.ADD
     )
     #? Contenedor de formulario lista de Usuarios
-    User_List_Container = ft.Container(
-        bgcolor= "#FBFAF9",
-        border_radius= ft.border_radius.all(10),
-        border= ft.border.all(2, "#EDEDED"),
-        padding=ft.padding.all(10),
+    User_List_Container = styles.ContainerStyle(
         width= 1200,
         height=300,
         content= ft.Column(

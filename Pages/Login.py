@@ -42,7 +42,7 @@ def Login(page: ft.Page):
     )
 
     #? Formulario de inicio de sesion
-    Form_login = ft.Container(
+    Form_login = styles.ContainerStyle(
         content=ft.Column(
             controls=[
                 ft.Text("Login to your Account", size=20, weight=ft.FontWeight.BOLD),
@@ -59,9 +59,6 @@ def Login(page: ft.Page):
         alignment=ft.alignment.center,
         width=450,
         height=400,
-        bgcolor= "#fbfaf9",
-        border_radius=ft.border_radius.all(10),
-        border=ft.border.all(1, color='#e8e8e8')
     )
     #* Limpieza de la pagina y adición de controles
     page.clean()

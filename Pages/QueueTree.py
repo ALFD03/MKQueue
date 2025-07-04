@@ -71,13 +71,9 @@ def QueueTree(page: ft.Page):
     )
 
     #? Contenedor para Lista de Colas
-    Queue_List_Container = ft.Container(
-        width= 900,
+    Queue_List_Container = styles.ContainerStyle(
+        width= 1190,
         height= 700,
-        bgcolor= "#FBFAF9",
-        border_radius= ft.border_radius.all(10),
-        border= ft.border.all(2, "#EDEDED"),
-        padding=ft.padding.all(10),
         content=ft.Column(
             [
                 ft.Divider(height=10, color= ft.Colors.TRANSPARENT),
@@ -108,7 +104,7 @@ def QueueTree(page: ft.Page):
                         ft.Row(
                             controls=[
                                 ft.Text("Queue Tree Management",style=styles.Page_Title, width= 200),
-                                ft.VerticalDivider(width=5, color= ft.Colors.TRANSPARENT),
+                                ft.VerticalDivider(width=300, color= ft.Colors.TRANSPARENT),
                                 Load_File_Button,
                                 Sync_Router_Button,
                                 Sync_From_Router_Button,
