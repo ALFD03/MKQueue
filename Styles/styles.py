@@ -41,30 +41,15 @@ class Login_textfield(ft.TextField):
         )
 
 #? Estilo de Container 1
-class ContainerStyle1(ft.Container):
+class ContainerStyle(ft.Container):
     def __init__(self, **kwargs):
         super().__init__(
-            width= 280,
-            height= 200,
             bgcolor= "#FBFAF9",
             border_radius= ft.border_radius.all(10),
             border= ft.border.all(2, "#EDEDED"),
             padding=ft.padding.all(10),
             **kwargs
         )
-
-#? Estilo de Container 2
-class ContainerStyles2(ft.Container):
-    def __init__(self, **kwargs):
-        super().__init__(
-            width= 900,
-            height= 500,
-            bgcolor= "#FBFAF9",
-            border_radius= ft.border_radius.all(10),
-            border= ft.border.all(2, "#EDEDED"),
-            padding=ft.padding.all(10),
-            **kwargs
-            )
 
 #? Estilo para Campo de Texto de pagina Settings
 class Settings_textfield(ft.TextField):
@@ -111,6 +96,18 @@ class DropDown(ft.Dropdown):
             ),
             enable_filter= True,
             **kwargs
+        )
+
+#? Estilo de boton para regresar a las listas
+class Back_to_the_list_Button (ft.ElevatedButton):
+    def __init__(self):
+        super().__init__(
+            style=Primary_Button,
+            text="Back to the list",
+            icon= ft.Icons.ARROW_BACK,
+            icon_color= ft.Colors.WHITE,
+            height=60,
+            width=200,
         )
 
 #! Estilos
