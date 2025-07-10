@@ -9,7 +9,7 @@ app_root = os.path.dirname(current_dir)
 sys.path.insert(0, app_root)
 
 import flet as ft
-from Styles import styles
+from Objects import function
 
 #! Definicion de los destinos de la barra de navegacion
 
@@ -84,6 +84,18 @@ Settings = ft.NavigationRailDestination(
     icon= ft.Icons.SETTINGS,
 )
 
+def Navigation_Change(page, index):
+    if index == 0:
+        function.navigate_to_dashboard(page)
+    elif index == 1:
+        function.navigate_to_queue_tree(page)
+    elif index == 2:
+        function.navigate_to_queue_type(page)
+    elif index == 3:
+        function.navigate_to_router(page)
+    elif index == 4:
+        function.navigate_to_settings(page)
+
 #! Definicion de la barra de navegacion
 Navigation_Bar = ft.NavigationRail(
     extended= True,
@@ -105,4 +117,5 @@ Navigation_Bar = ft.NavigationRail(
         Router,
         Settings
     ],
+    on_change= lambda e: Navigation_Change(e.page, e.control.selected_index),
 )
