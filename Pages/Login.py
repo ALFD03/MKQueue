@@ -10,6 +10,7 @@ sys.path.insert(0, app_root)
 
 import flet as ft
 from Styles import styles
+from Objects.function import Authentication
 
 #! Pagina de Login
 def Login(page: ft.Page):
@@ -50,7 +51,7 @@ def Login(page: ft.Page):
                 Username,
                 Password,
                 ft.Divider(height=10,color= ft.Colors.TRANSPARENT),
-                ft.ElevatedButton("Login", width=300, style= styles.Primary_Button, height=50),
+                ft.ElevatedButton("Login", width=300, style= styles.Primary_Button, height=50, on_click=lambda e: Authentication(page, Username.value, Password.value))
             ],
             alignment=ft.MainAxisAlignment.CENTER,
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
