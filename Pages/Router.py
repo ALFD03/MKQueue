@@ -11,6 +11,7 @@ sys.path.insert(0, app_root)
 import flet as ft
 from Objects import Navigation_Bar
 from Styles import styles
+from Objects.function import navigate_to_add_new_router
 
 #! Pagina de Router
 def Router(page: ft.Page):
@@ -39,7 +40,7 @@ def Router(page: ft.Page):
         icon= ft.Icons.ADD,
         icon_color= ft.Colors.WHITE,
     )
-
+    Add_New_Router.on_click = lambda e: navigate_to_add_new_router(page)
     #? Contenedor para Lista de Routers
     Router_List_Container = styles.ContainerStyle(
         width= 1190,

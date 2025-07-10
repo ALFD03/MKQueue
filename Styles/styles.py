@@ -156,7 +156,7 @@ Page_Subtitle = ft.TextStyle(
 #? Estilo de Texto para Valor de Container en pagina Dashboard
 Values_Style = ft.TextStyle(
     color= ft.Colors.BLACK,
-    size= 18,
+    size= 20,
     weight= ft.FontWeight.W_800,
 )
 

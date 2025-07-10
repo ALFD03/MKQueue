@@ -1,5 +1,4 @@
-#MKQueue/Pages/Sub-Pages/Add_Queue_tree.py
-
+# MKQueue/Pages/Sub-Pages/Add_Router.py
 
 #! Importaciones
 import sys
@@ -12,9 +11,11 @@ sys.path.insert(0, app_root)
 import flet as ft
 from Styles import styles
 from Objects import Navigation_Bar
+from Objects import function
+from Objects.function import navigate_to_router 
 
 #! Pagina de Dashboard
-def Dashboard(page: ft.Page):
+def Add_Router(page: ft.Page):
     #*Estilos de la pagina
     page.theme_mode = ft.ThemeMode.LIGHT
     page.bgcolor = '#FFFFFF'
@@ -26,55 +27,41 @@ def Dashboard(page: ft.Page):
         "Inter": "Recursos/Fuentes/Inter.ttf",
     }
     page.theme = ft.Theme(font_family="Inter")
-    page.title = "MKQueue - Add Queue Tree"
+    page.title = "MKQueue - Add Router"
     page.padding = ft.padding.all(0)
     
     #* Controles de la pagina
     
-    #? Boton para regresar a la lista de las Queue Tree
-    Back_to_Queue_Tree_Button = styles.Back_to_the_list_Button()
+    #? Boton para regresar a la lista de los Routers
+    Back_to_the_router_list = styles.Back_to_the_list_Button()
+    Back_to_the_router_list.on_click = lambda e: navigate_to_router(page)
 
-    #? Controles de Formulario para Agregar Queue Tree
+    #? Controles de Formulario para Agregar Router
 
-    #Nombre de Queue
+    #Nombre de Router
     Name = styles.Settings_textfield(
-        label= "Queue Tree Name",
+        label= "Router Name",
         autofocus= True
     )
 
-    #Seleccion de router
-    router = styles.DropDown(
-        label= "Router"
+    #Direccion IP del Router
+    router = styles.Settings_textfield(
+        label= "Router IP"
     )
 
-    #Tipo de Cola
-    Queue_type = styles.DropDown(
-        label= "Queue Type"
+    #Usuario de acceso al Router
+    User = styles.Settings_textfield(
+        label= "User"
     )
 
-    #Pariente
-    Parent = styles.DropDown(
-        label= "Parent"
+    #Contraseña de acceso al Router
+    Password = styles.Settings_textfield(
+        label= "Password"
     )
 
-    #Marcado de paquete
-    Packet_Marks = styles.DropDown(
-        label= "Packet Marks"
-    )
-
-    #Limite Maximo de Traffico
-    Max_Limit = styles.Settings_textfield(
-        label= "Max Limit"
-    )
-
-    #Limite Minimo de Trafico
-    Limit_at = styles.Settings_textfield(
-        label= "Limit At"
-    )
-
-    #Prioridad de la Cola'
-    Priority = styles.Settings_textfield(
-        label= "Priority"
+    #Numero de Puerto de acceso al Router
+    Port = styles.Settings_textfield(
+        label= "Port"
     )
 
     #Limpieza de Fomulario
@@ -85,29 +72,26 @@ def Dashboard(page: ft.Page):
         style=styles.Secundary_Button
     )
 
-    #Creacion de Cola
+    #Creacion de Router
     Save= ft.ElevatedButton(
-        text= "Create Queue Tree",
+        text= "Create Router",
         width= 585,
         height= 60,
         icon= ft.Icons.ADD,
         style= styles.Primary_Button
     )
 
-    #? Contenedor para Formulario de Agregar Queue Tree
-    Add_New_Queue_Tree_Container = styles.ContainerStyle(
+    #? Contenedor para Formulario de Agregar Router
+    Add_New_Router_Container = styles.ContainerStyle(
         content= ft.Column(
             controls=[
-                ft.Text("Queue Tree Details", style=styles.Page_Subtitle),
+                ft.Text("Router Details", style=styles.Page_Subtitle),
                 ft.Row(height=20),
                 Name,
                 router,
-                Queue_type,
-                Parent,
-                Packet_Marks,
-                Max_Limit,
-                Limit_at,
-                Priority,
+                User,
+                Password,
+                Port,
                 ft.Row([clear,Save])
             ],
             horizontal_alignment=ft.CrossAxisAlignment.CENTER
@@ -135,13 +119,13 @@ def Dashboard(page: ft.Page):
                         ft.Row(height= 10),
                         ft.Row(
                             controls=[
-                                ft.Text("Add Queue Tree", style=styles.Page_Title,),
+                                ft.Text("Add Router", style=styles.Page_Title,),
                                 ft.VerticalDivider(width=830),
-                                Back_to_Queue_Tree_Button
+                                Back_to_the_router_list
                             ]
                         ),
                         ft.Row(height= 20),
-                        Add_New_Queue_Tree_Container
+                        Add_New_Router_Container
                     ]
                 ),
             ],
@@ -152,4 +136,4 @@ def Dashboard(page: ft.Page):
 
 #! Ejecutar la aplicacion siempre que se ejecute desde este archivo
 if __name__ == "__main__":
-    ft.app(Dashboard)
+    ft.app(Add_Router)

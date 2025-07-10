@@ -11,6 +11,7 @@ sys.path.insert(0, app_root)
 import flet as ft
 from Objects import Navigation_Bar
 from Styles import styles
+from Objects.function import navigate_to_add_new_queue_tree
 
 #! Pagina del Arbol de Colas
 def QueueTree(page: ft.Page):
@@ -51,14 +52,14 @@ def QueueTree(page: ft.Page):
     )
 
     #? Boton para sincronizar desde el router
-    Sync_From_Router_Button = ft.ElevatedButton(
-        style=styles.Primary_Button,
-        text= "Sync From Router",
-        width= 160,
-        height= 60,
-        icon= ft.Icons.SYNC,
-        icon_color= ft.Colors.WHITE,
-    )
+    # Sync_From_Router_Button = ft.ElevatedButton(
+    #     style=styles.Primary_Button,
+    #     text= "Sync From Router",
+    #     width= 160,
+    #     height= 60,
+    #     icon= ft.Icons.SYNC,
+    #     icon_color= ft.Colors.WHITE,
+    # )
 
     #? Boton para Agregar una nueva cola
     Add_Queue_Button = ft.ElevatedButton(
@@ -69,6 +70,7 @@ def QueueTree(page: ft.Page):
         icon= ft.Icons.ADD,
         icon_color= ft.Colors.WHITE,
     )
+    Add_Queue_Button.on_click = lambda e: navigate_to_add_new_queue_tree(page)
 
     #? Contenedor para Lista de Colas
     Queue_List_Container = styles.ContainerStyle(
@@ -104,10 +106,10 @@ def QueueTree(page: ft.Page):
                         ft.Row(
                             controls=[
                                 ft.Text("Queue Tree Management",style=styles.Page_Title, width= 200),
-                                ft.VerticalDivider(width=300, color= ft.Colors.TRANSPARENT),
+                                ft.VerticalDivider(width=470, color= ft.Colors.TRANSPARENT),
                                 Load_File_Button,
                                 Sync_Router_Button,
-                                Sync_From_Router_Button,
+                                #Sync_From_Router_Button,
                                 Add_Queue_Button,
                             ],
                         ),

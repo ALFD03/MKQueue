@@ -44,20 +44,20 @@ Queue_Tree = ft.NavigationRailDestination(
 )
 
 #? Destino del Queue Type
-Queue_type = ft.NavigationRailDestination(
-    label_content= ft.Text(
-        "Queue Type",
-        size= 14,
-        weight= ft.FontWeight.W_700,
-    ),
-    icon= ft.Image(
-        src= "Recursos/Iconos/QueueTypeIcon.png",
-        width= 30,
-        height= 30,
-        fit= ft.ImageFit.CONTAIN,
+# Queue_type = ft.NavigationRailDestination(
+#     label_content= ft.Text(
+#         "Queue Type",
+#         size= 14,
+#         weight= ft.FontWeight.W_700,
+#     ),
+#     icon= ft.Image(
+#         src= "Recursos/Iconos/QueueTypeIcon.png",
+#         width= 30,
+#         height= 30,
+#         fit= ft.ImageFit.CONTAIN,
         
-    ),
-)
+#     ),
+# )
 
 #? Destino del Router
 Router = ft.NavigationRailDestination(
@@ -89,11 +89,11 @@ def Navigation_Change(page, index):
         function.navigate_to_dashboard(page)
     elif index == 1:
         function.navigate_to_queue_tree(page)
+    # elif index == 2:
+    #     function.navigate_to_queue_type(page)
     elif index == 2:
-        function.navigate_to_queue_type(page)
-    elif index == 3:
         function.navigate_to_router(page)
-    elif index == 4:
+    elif index == 3:
         function.navigate_to_settings(page)
 
 #! Definicion de la barra de navegacion
@@ -113,7 +113,7 @@ Navigation_Bar = ft.NavigationRail(
     destinations= [
         Dashboard,
         Queue_Tree,
-        Queue_type,
+        #Queue_type,
         Router,
         Settings
     ],

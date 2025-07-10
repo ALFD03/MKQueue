@@ -39,24 +39,24 @@ def Dashboard(page: ft.Page):
                 Value_Active_QueueTree,
                 ft.Text("Active Queue Tree", style=styles.ContainerLabel_style)
             ],
-            width= 360,
+            width= 570,
             height= 200,
             )
     )
 
     #? Contenedor para las queue types activas
-    Value_Active_QueueType = ft.Text(style=styles.Values_Style)
-    Active_QueueType = styles.ContainerStyle(
-        content=ft.Column(
-            [
-                ft.Image(src="Recursos/Iconos/QueueTypeIcon.png", width=40, height=80, fit=ft.ImageFit.CONTAIN),
-                Value_Active_QueueType,
-                ft.Text("Active Queue Type", style=styles.ContainerLabel_style)
-            ],
-            width= 360,
-            height= 200,
-            )
-    )
+    # Value_Active_QueueType = ft.Text(style=styles.Values_Style)
+    # Active_QueueType = styles.ContainerStyle(
+    #     content=ft.Column(
+    #         [
+    #             ft.Image(src="Recursos/Iconos/QueueTypeIcon.png", width=40, height=80, fit=ft.ImageFit.CONTAIN),
+    #             Value_Active_QueueType,
+    #             ft.Text("Active Queue Type", style=styles.ContainerLabel_style)
+    #         ],
+    #         width= 360,
+    #         height= 200,
+    #         )
+    # )
 
     #? Contenedor para los router activos
     Value_Active_Router = ft.Text(style=styles.Values_Style)
@@ -67,7 +67,7 @@ def Dashboard(page: ft.Page):
                 Value_Active_Router,
                 ft.Text("Active Router", style=styles.ContainerLabel_style)
             ],
-            width= 360,
+            width= 570,
             height= 200,
             )
     )
@@ -108,7 +108,7 @@ def Dashboard(page: ft.Page):
                         ft.Row(
                             [
                                 Active_QueueTree,
-                                Active_QueueType,
+                                #Active_QueueType,
                                 Active_Router
                             ],
                             spacing= 30,
