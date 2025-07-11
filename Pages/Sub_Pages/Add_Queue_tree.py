@@ -55,6 +55,12 @@ def Add_Queue_tree(page: ft.Page):
         label= "Parent"
     )
 
+    #Velocidad
+    Speed = styles.Settings_textfield(
+        label= "Queue Speed",
+        hint_text= "Only Numbers"
+    )
+
     #Nombre de Cola Descarga
     Download_Queue = styles.Settings_textfield(
         label= "Download Queue"
@@ -91,6 +97,7 @@ def Add_Queue_tree(page: ft.Page):
                 Name,
                 router,
                 Parent,
+                Speed,
                 Download_Queue,
                 Upload_Queue,
                 ft.Row([clear,Save])

@@ -48,6 +48,15 @@ def Add_New_User(page: ft.Page):
         label= "Email"
     )
 
+    #Nombre
+    Name = styles.Settings_textfield(
+        label= "Name"
+    )
+
+    #Apellido
+    Last_name = styles.Settings_textfield(
+        label= "Last Name"
+    )
     #Contraseña del Usuario
     Password = styles.Settings_textfield(
         label= "Password"
@@ -88,6 +97,8 @@ def Add_New_User(page: ft.Page):
                 ft.Row(height=20),
                 Username,
                 Email,
+                Name,
+                Last_name,
                 Password,
                 Confirm_Password,
                 Privileges,

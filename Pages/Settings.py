@@ -38,18 +38,17 @@ def Settings(page: ft.Page):
     )
     #Email
     Email = styles.Settings_textfield(
-        label= "Email"
+        label= "Email",
     )
     #Nombres
     Names = styles.Settings_textfield(
-        label= "Name"
+        label= "Name",
     )
     #Apellidos
     Last_Name = styles.Settings_textfield(
-        label= "Last Name"
+        label= "Last Name",
     )
     Privileges = styles.DropDown(
-        disabled= True,
         label= "Privilegios"
     )
 
