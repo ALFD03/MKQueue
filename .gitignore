@@ -1,2 +1,4 @@
 __pycache__/
 MKQueue/
+.env
+Variables.json
