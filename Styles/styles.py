@@ -71,7 +71,6 @@ class Settings_textfield(ft.TextField):
                 weight= ft.FontWeight.W_500,
                 size= 12,
             ),
-            disabled= True,
             **kwargs
         )
 
