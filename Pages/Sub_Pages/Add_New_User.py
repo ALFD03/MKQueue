@@ -9,9 +9,28 @@ app_root = os.path.dirname(os.path.dirname(current_dir))
 sys.path.insert(0, app_root)
 
 import flet as ft
+import psycopg2 as ps
 from Styles import styles
 from Objects import Navigation_Bar
 from Objects import function
+from Objects.function import AddNewUser, clear_controls
+
+def ValAddNewUser(page, Username, Email, Name, Last_Name, Password, Confirm_Password, Privileges):
+    if all([Username, Email, Name, Last_Name, Password, Confirm_Password, Privileges]):
+        if Password == Confirm_Password:
+            try:
+                AddNewUser(Username, Email, Name, Last_Name, Password, Confirm_Password, Privileges)
+
+            except ps.errors.UniqueViolation:
+                page.open(ft.SnackBar(ft.Text("Ya existe el usuario.")))
+
+            except Exception as e:
+                print(f"Hubo un error al cargar los datos: {e}")
+        else:
+            page.open(ft.SnackBar(ft.Text("Las contraseñas no coinciden.")))
+    else:
+        page.open(ft.SnackBar(ft.Text("Existe algun campo Vacio")))
+
 
 #! Pagina de Dashboard
 def Add_New_User(page: ft.Page):
@@ -69,7 +88,11 @@ def Add_New_User(page: ft.Page):
 
     #Privilegios del Usuario
     Privileges = styles.DropDown(
-        label= "Privileges"
+        label= "Privileges",
+        options= [
+            ft.DropdownOption(1,"Administrator"),
+            ft.DropdownOption(0,"Viewer"),
+        ],
     )
 
     #Limpieza de Fomulario
@@ -77,7 +100,8 @@ def Add_New_User(page: ft.Page):
         text= "Clear",
         width= 585,
         height= 60,
-        style=styles.Secundary_Button
+        style=styles.Secundary_Button,
+        on_click= lambda e: clear_controls(page, Add_New_User)
     )
 
     #Creacion de Usuario
@@ -86,7 +110,9 @@ def Add_New_User(page: ft.Page):
         width= 585,
         height= 60,
         icon= ft.Icons.ADD,
-        style= styles.Primary_Button
+        style= styles.Primary_Button,
+        on_click= lambda e: ValAddNewUser(page, Username.value,Email.value,Name.value,Last_name.value,Password.value,Confirm_Password.value,Privileges.value)
+
     )
 
     #? Contenedor para Formulario de Agregar Queue Tree
