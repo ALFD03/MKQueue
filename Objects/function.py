@@ -55,6 +55,10 @@ def navigate_to_add_new_queue_tree(page):
 
 #! Funciones para eventos
 
+#? Funcion de Limpieza de controles
+def clear_controls(page, function_page):
+    function_page(page)
+
 #? Funcion de Agregar user
 def AddNewUser (Username, Email, Name, Last_name, Password, Confirm_Password, Privileges):
     conn = Connect_db()
@@ -74,10 +78,3 @@ def AddNewUser (Username, Email, Name, Last_name, Password, Confirm_Password, Pr
     conn.commit()
     psql.close()
     conn.close()
-
-#? Funcion de Limpieza de controles
-def clear_controls(page, function_page):
-    function_page(page)
-
-
-            
