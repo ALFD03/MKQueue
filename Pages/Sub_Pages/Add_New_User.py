@@ -20,6 +20,7 @@ def ValAddNewUser(page, Username, Email, Name, Last_Name, Password, Confirm_Pass
         if Password == Confirm_Password:
             try:
                 AddNewUser(Username, Email, Name, Last_Name, Password, Confirm_Password, Privileges)
+                page.open(ft.SnackBar(ft.Text("El usuario fue cargado exitosamente.")))
 
             except ps.errors.UniqueViolation:
                 page.open(ft.SnackBar(ft.Text("Ya existe el usuario.")))

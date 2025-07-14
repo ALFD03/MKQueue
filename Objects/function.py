@@ -78,3 +78,88 @@ def AddNewUser (Username, Email, Name, Last_name, Password, Confirm_Password, Pr
     conn.commit()
     psql.close()
     conn.close()
+
+
+#? Funcion para agregar router
+def AddRouter (router_name, router_ip, router_user, router_password, router_port):
+    conn = Connect_db()
+    psql = conn.cursor()
+    psql.execute(
+        "INSERT INTO router (router_name, router_ip, router_user, router_password,router_port) VALUES (%s, %s, %s, %s, %s)",
+        (
+            router_name,
+            router_ip,
+            router_user,
+            router_password,
+            router_port
+        )
+    )
+    conn.commit()
+    psql.close()
+    conn.close()
+
+#? Funcion para listar routers
+def ListRouter(page, DropDown):
+    conn = Connect_db()
+    psql = conn.cursor()
+    psql.execute(
+        "SELECT router_name FROM router"
+    )
+    list_router = psql.fetchall()
+    conn.commit()
+    psql.close()
+    conn.close()
+    
+    options = []
+    
+    for router in list_router:
+        #router = str(router[0]).strip(" '\"")
+        options.append(
+            ft.DropdownOption(key=router[0])
+        )
+
+    DropDown.options=options
+    page.update()
+
+#? Funcion para listar de Parientes
+def ListParent(page, DropDown, router):
+    conn = Connect_db()
+    psql = conn.cursor()
+    psql.execute(
+        "SELECT parent_name FROM parent WHERE router = %s ",
+        (router,)
+    )
+    list_parent = psql.fetchall()
+    conn.commit()
+    psql.close()
+    conn.close()
+    
+    options = []
+    
+    for parent in list_parent:
+        #router = str(router[0]).strip(" '\"")
+        options.append(
+            ft.DropdownOption(key=parent[0])
+        )
+
+    DropDown.options=options
+    DropDown.disabled= False
+    page.update()
+
+def AddQueueTree(queuetree_name, queuetree_router, queuetree_parent, speed, download_queue, upload_queue):
+    conn = Connect_db()
+    psql = conn.cursor()
+    psql.execute(
+        "INSERT INTO queue_tree (queuetree_name, queuetree_router, queuetree_parent, speed, download_queue, upload_queue) VALUES (%s, %s, %s, %s, %s, %s)",
+        (
+            queuetree_name, 
+            queuetree_router,
+            queuetree_parent,
+            speed,
+            download_queue,
+            upload_queue
+        )
+    )
+    conn.commit()
+    psql.close()
+    conn.close()

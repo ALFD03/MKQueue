@@ -10,10 +10,30 @@ app_root = os.path.dirname(os.path.dirname(current_dir))
 sys.path.insert(0, app_root)
 
 import flet as ft
+import psycopg2 as ps
 from Styles import styles
 from Objects import Navigation_Bar
-from Objects import function
-from Objects.function import navigate_to_queue_tree
+from Objects.function import navigate_to_queue_tree, clear_controls, ListRouter, ListParent, AddQueueTree
+
+def ValAddQueueTree(page, queuetree_name, queuetree_router, queuetree_parent, speed, download_queue, upload_queue):
+    if all([queuetree_name, queuetree_router, queuetree_parent, speed, download_queue, upload_queue]):
+            try:
+                speed = int(speed)
+
+            except:
+                page.open(ft.SnackBar(ft.Text("La velocidad no es correcta")))
+
+            try:
+                AddQueueTree(queuetree_name, queuetree_router, queuetree_parent, speed, download_queue, upload_queue)
+                page.open(ft.SnackBar(ft.Text("La cola fue cargado exitosamente.")))
+
+            except ps.errors.UniqueViolation:
+                page.open(ft.SnackBar(ft.Text("Ya existe la cola.")))
+
+            except Exception as e:
+                print(f"Hubo un error al cargar los datos: {e}")
+    else:
+        page.open(ft.SnackBar(ft.Text("Existe algun campo Vacio")))
 
 #! Pagina de Dashboard
 def Add_Queue_tree(page: ft.Page):
@@ -47,12 +67,15 @@ def Add_Queue_tree(page: ft.Page):
 
     #Seleccion de router
     router = styles.DropDown(
-        label= "Router"
+        label= "Router",
+        on_change= lambda e: ListParent(page, Parent, router.value)
     )
 
     #Pariente
     Parent = styles.DropDown(
-        label= "Parent"
+        label= "Parent",
+        disabled=True,
+        
     )
 
     #Velocidad
@@ -76,7 +99,8 @@ def Add_Queue_tree(page: ft.Page):
         text= "Clear",
         width= 585,
         height= 60,
-        style=styles.Secundary_Button
+        style=styles.Secundary_Button,
+        on_click= lambda e: clear_controls(page, Add_Queue_tree)
     )
 
     #Creacion de Cola
@@ -85,7 +109,8 @@ def Add_Queue_tree(page: ft.Page):
         width= 585,
         height= 60,
         icon= ft.Icons.ADD,
-        style= styles.Primary_Button
+        style= styles.Primary_Button,
+        on_click= lambda e: ValAddQueueTree(page, Name.value, router.value, Parent.value, Speed.value, Download_Queue.value, Upload_Queue.value)
     )
 
     #? Contenedor para Formulario de Agregar Queue Tree
@@ -109,6 +134,7 @@ def Add_Queue_tree(page: ft.Page):
 
     #* Limpieza de la Pagina y adición de controles
     page.clean()
+    ListRouter(page, router)
     page.add(
         ft.Row(
             controls=[
@@ -128,7 +154,7 @@ def Add_Queue_tree(page: ft.Page):
                         ft.Row(
                             controls=[
                                 ft.Text("Add Queue Tree", style=styles.Page_Title,),
-                                ft.VerticalDivider(width=830),
+                                ft.VerticalDivider(width=810),
                                 Back_to_Queue_Tree_Button
                             ]
                         ),

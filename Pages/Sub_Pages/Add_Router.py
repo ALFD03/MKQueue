@@ -9,10 +9,36 @@ app_root = os.path.dirname(os.path.dirname(current_dir))
 sys.path.insert(0, app_root)
 
 import flet as ft
+import psycopg2 as ps
+import ipaddress as ip
 from Styles import styles
 from Objects import Navigation_Bar
-from Objects import function
 from Objects.function import navigate_to_router 
+from Objects.function import clear_controls, AddRouter
+
+def ValAddRouter(page, Name, router, User, Password, Port):
+    try:
+        try:
+            Port = int(Port)
+        except:
+            page.open(ft.SnackBar(ft.Text("El numero de puerto no es correcto")))
+
+        ip.IPv4Address(router)
+        if all([Name, router, User, Password, Port]):
+            try:
+                AddRouter(Name, router, User, Password, Port)
+                page.open(ft.SnackBar(ft.Text("El router fue cargado exitosamente.")))
+
+            except ps.errors.UniqueViolation:
+                page.open(ft.SnackBar(ft.Text("Ya existe el router.")))
+
+            except Exception as e:
+                print(f"Hubo un error al cargar los datos: {e}")
+        else:
+            page.open(ft.SnackBar(ft.Text("Existe algun campo Vacio")))
+
+    except ValueError:
+        page.open(ft.SnackBar(ft.Text("La dirrecion IP no esta en formato correcto")))
 
 #! Pagina de Dashboard
 def Add_Router(page: ft.Page):
@@ -46,7 +72,8 @@ def Add_Router(page: ft.Page):
 
     #Direccion IP del Router
     router = styles.Settings_textfield(
-        label= "Router IP"
+        label= "Router IP",
+        hint_text= "Se tiene que escribir en formato IP"
     )
 
     #Usuario de acceso al Router
@@ -69,7 +96,8 @@ def Add_Router(page: ft.Page):
         text= "Clear",
         width= 585,
         height= 60,
-        style=styles.Secundary_Button
+        style=styles.Secundary_Button,
+        on_click=lambda e: clear_controls(page, Add_Router)
     )
 
     #Creacion de Router
@@ -78,7 +106,8 @@ def Add_Router(page: ft.Page):
         width= 585,
         height= 60,
         icon= ft.Icons.ADD,
-        style= styles.Primary_Button
+        style= styles.Primary_Button,
+        on_click=lambda e: ValAddRouter(page, Name.value, router.value, User.value, Password.value, Port.value)
     )
 
     #? Contenedor para Formulario de Agregar Router
@@ -120,7 +149,7 @@ def Add_Router(page: ft.Page):
                         ft.Row(
                             controls=[
                                 ft.Text("Add Router", style=styles.Page_Title,),
-                                ft.VerticalDivider(width=830),
+                                ft.VerticalDivider(width=860),
                                 Back_to_the_router_list
                             ]
                         ),
