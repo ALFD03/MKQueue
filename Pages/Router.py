@@ -11,8 +11,8 @@ sys.path.insert(0, app_root)
 import flet as ft
 from Objects import Navigation_Bar
 from Styles import styles
-from Objects import function
-from Objects.function import navigate_to_add_new_router, ViewRouter
+from Objects.Global_Function import navigate_to_add_new_router
+from Objects.Router_Function import ViewRouter, EditRouterFunction, DeleteRouterFunction
 
 #! Pagina de Router
 def Router(page: ft.Page):
@@ -63,15 +63,15 @@ def Router(page: ft.Page):
                 ft.Divider(height=10, color= ft.Colors.TRANSPARENT),
                 ft.Text("Configured Router", style=styles.Page_Subtitle,),
                 ft.Divider(height=10, color= ft.Colors.TRANSPARENT),
-                Router_List
+                ft.Column([Router_List],scroll=ft.ScrollMode.AUTO, height=600)
             ],
-            horizontal_alignment=ft.CrossAxisAlignment.CENTER
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
         )
     )
 
     #* Limpieza de la Pagina y adición de controles
     page.clean()
-    ViewRouter(page, Router_List, function.EditRouterFunction, function.DeleteRouterFunction)
+    ViewRouter(page, Router_List, EditRouterFunction, DeleteRouterFunction)
     page.add(
         ft.Row(
             controls=[

@@ -12,8 +12,8 @@ import flet as ft
 import psycopg2 as ps
 from Styles import styles
 from Objects import Navigation_Bar
-from Objects import function
-from Objects.function import AddNewUser, clear_controls
+from Objects.Global_Function import clear_controls, navigate_to_settings
+from Objects.Settings_Function import AddNewUser
 
 def ValAddNewUser(page, Username, Email, Name, Last_Name, Password, Confirm_Password, Privileges):
     if all([Username, Email, Name, Last_Name, Password, Confirm_Password, Privileges]):
@@ -53,7 +53,7 @@ def Add_New_User(page: ft.Page):
     
     #? Boton para regresar a las configuraciones
     Back_to_Settings_Button = styles.Back_to_the_list_Button()
-    Back_to_Settings_Button.on_click = lambda e: function.navigate_to_settings(page)
+    Back_to_Settings_Button.on_click = lambda e: navigate_to_settings(page)
 
     #? Controles de Formulario para Agregar Usuario
 

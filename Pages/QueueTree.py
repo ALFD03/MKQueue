@@ -11,7 +11,8 @@ sys.path.insert(0, app_root)
 import flet as ft
 from Objects import Navigation_Bar
 from Styles import styles
-from Objects.function import navigate_to_add_new_queue_tree
+from Objects.Global_Function import navigate_to_add_new_queue_tree
+from Objects.Queue_Tree_Function import ViewQueue, EditQueueFunction, DeleteQueueFunction
 
 #! Pagina del Arbol de Colas
 def QueueTree(page: ft.Page):
@@ -42,14 +43,14 @@ def QueueTree(page: ft.Page):
     )
 
     #? Boton para Sincronizar con el Router
-    Sync_Router_Button = ft.ElevatedButton(
-        style=styles.Primary_Button,
-        text= "Sync To Router",
-        width= 160,
-        height= 60,
-        icon= ft.Icons.SYNC_ALT,
-        icon_color= ft.Colors.WHITE,
-    )
+    # Sync_Router_Button = ft.ElevatedButton(
+    #     style=styles.Primary_Button,
+    #     text= "Sync To Router",
+    #     width= 160,
+    #     height= 60,
+    #     icon= ft.Icons.SYNC_ALT,
+    #     icon_color= ft.Colors.WHITE,
+    # )
 
     #? Boton para sincronizar desde el router
     # Sync_From_Router_Button = ft.ElevatedButton(
@@ -72,6 +73,16 @@ def QueueTree(page: ft.Page):
     )
     Add_Queue_Button.on_click = lambda e: navigate_to_add_new_queue_tree(page)
 
+     #? Lista de Queue Tree
+    Queuetree_List = styles.List_tables(
+        columns=[
+            ft.DataColumn(ft.Text(style=styles.Page_Subtitle, value="Queue Tree Name")),
+            ft.DataColumn(ft.Text(style=styles.Page_Subtitle, value="Queue Tree Router")),
+            ft.DataColumn(ft.Text(style=styles.Page_Subtitle, value="Queue Tree Parent")),
+            ft.DataColumn(ft.Text(style=styles.Page_Subtitle, value="Actions"))
+        ]
+    )
+
     #? Contenedor para Lista de Colas
     Queue_List_Container = styles.ContainerStyle(
         width= 1190,
@@ -80,13 +91,16 @@ def QueueTree(page: ft.Page):
             [
                 ft.Divider(height=10, color= ft.Colors.TRANSPARENT),
                 ft.Text("Configured Queue Trees", style=styles.Page_Subtitle,),
+                ft.Divider(height=10, color= ft.Colors.TRANSPARENT),
+                ft.Column([Queuetree_List],scroll=ft.ScrollMode.AUTO, height=600)
             ],
-            horizontal_alignment=ft.CrossAxisAlignment.CENTER
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
         )
     )
 
     #* Limpieza de la Pagina y adición de controles
     page.clean()
+    ViewQueue(page, Queuetree_List, EditQueueFunction, DeleteQueueFunction)
     page.add(
         ft.Row(
             controls=[
@@ -106,9 +120,9 @@ def QueueTree(page: ft.Page):
                         ft.Row(
                             controls=[
                                 ft.Text("Queue Tree Management",style=styles.Page_Title, width= 200),
-                                ft.VerticalDivider(width=470, color= ft.Colors.TRANSPARENT),
+                                ft.VerticalDivider(width=630, color= ft.Colors.TRANSPARENT),
                                 Load_File_Button,
-                                Sync_Router_Button,
+                                #Sync_Router_Button,
                                 #Sync_From_Router_Button,
                                 Add_Queue_Button,
                             ],

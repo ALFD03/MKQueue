@@ -11,7 +11,7 @@ sys.path.insert(0, app_root)
 import flet as ft
 from Objects import Navigation_Bar
 from Styles import styles
-from Objects.function import navigate_to_add_new_user
+from Objects.Global_Function import navigate_to_add_new_user
 
 #! Pagina de Configuraciones
 def Settings(page: ft.Page):

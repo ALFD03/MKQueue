@@ -13,7 +13,9 @@ import flet as ft
 import psycopg2 as ps
 from Styles import styles
 from Objects import Navigation_Bar
-from Objects.function import navigate_to_queue_tree, clear_controls, ListRouter, ListParent, AddQueueTree
+from Objects.Global_Function import navigate_to_queue_tree, clear_controls
+from Objects.Queue_Tree_Function import ListParent, AddQueueTree
+from Objects.Router_Function import ListRouter
 
 def ValAddQueueTree(page, queuetree_name, queuetree_router, queuetree_parent, speed, download_queue, upload_queue):
     if all([queuetree_name, queuetree_router, queuetree_parent, speed, download_queue, upload_queue]):

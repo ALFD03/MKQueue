@@ -13,8 +13,8 @@ import psycopg2 as ps
 import ipaddress as ip
 from Styles import styles
 from Objects import Navigation_Bar
-from Objects.function import navigate_to_router 
-from Objects.function import clear_controls, AddRouter
+from Objects.Global_Function import navigate_to_router, clear_controls
+from Objects.Router_Function import AddRouter
 
 def ValAddRouter(page, Name, router, User, Password, Port):
     try:

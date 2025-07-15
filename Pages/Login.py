@@ -10,7 +10,7 @@ sys.path.insert(0, app_root)
 
 import flet as ft
 from Styles import styles
-from Objects.function import Authentication
+from Objects.Global_Function import Authentication
 
 #! Pagina de Login
 def Login(page: ft.Page):

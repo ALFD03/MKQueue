@@ -9,7 +9,7 @@ app_root = os.path.dirname(current_dir)
 sys.path.insert(0, app_root)
 
 import flet as ft
-from Objects import function
+from Objects.Global_Function import navigate_to_dashboard, navigate_to_queue_tree, navigate_to_router, navigate_to_settings
 
 #! Definicion de los destinos de la barra de navegacion
 
@@ -86,15 +86,15 @@ Settings = ft.NavigationRailDestination(
 
 def Navigation_Change(page, index):
     if index == 0:
-        function.navigate_to_dashboard(page)
+        navigate_to_dashboard(page)
     elif index == 1:
-        function.navigate_to_queue_tree(page)
+        navigate_to_queue_tree(page)
     # elif index == 2:
-    #     function.navigate_to_queue_type(page)
+    #     navigate_to_queue_type(page)
     elif index == 2:
-        function.navigate_to_router(page)
+        navigate_to_router(page)
     elif index == 3:
-        function.navigate_to_settings(page)
+        navigate_to_settings(page)
 
 #! Definicion de la barra de navegacion
 Navigation_Bar = ft.NavigationRail(
