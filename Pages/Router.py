@@ -11,7 +11,8 @@ sys.path.insert(0, app_root)
 import flet as ft
 from Objects import Navigation_Bar
 from Styles import styles
-from Objects.function import navigate_to_add_new_router
+from Objects import function
+from Objects.function import navigate_to_add_new_router, ViewRouter
 
 #! Pagina de Router
 def Router(page: ft.Page):
@@ -41,6 +42,18 @@ def Router(page: ft.Page):
         icon_color= ft.Colors.WHITE,
     )
     Add_New_Router.on_click = lambda e: navigate_to_add_new_router(page)
+    
+    #? Lista de Routers
+    Router_List = styles.List_tables(
+        columns=[
+            ft.DataColumn(ft.Text(style=styles.Page_Subtitle, value="Router Name")),
+            ft.DataColumn(ft.Text(style=styles.Page_Subtitle, value="Router Ip")),
+            ft.DataColumn(ft.Text(style=styles.Page_Subtitle, value="Router User")),
+            ft.DataColumn(ft.Text(style=styles.Page_Subtitle, value="Router Port")),
+            ft.DataColumn(ft.Text(style=styles.Page_Subtitle, value="Actions"))
+        ]
+    )
+
     #? Contenedor para Lista de Routers
     Router_List_Container = styles.ContainerStyle(
         width= 1190,
@@ -49,6 +62,8 @@ def Router(page: ft.Page):
             [
                 ft.Divider(height=10, color= ft.Colors.TRANSPARENT),
                 ft.Text("Configured Router", style=styles.Page_Subtitle,),
+                ft.Divider(height=10, color= ft.Colors.TRANSPARENT),
+                Router_List
             ],
             horizontal_alignment=ft.CrossAxisAlignment.CENTER
         )
@@ -56,6 +71,7 @@ def Router(page: ft.Page):
 
     #* Limpieza de la Pagina y adición de controles
     page.clean()
+    ViewRouter(page, Router_List, function.EditRouterFunction, function.DeleteRouterFunction)
     page.add(
         ft.Row(
             controls=[

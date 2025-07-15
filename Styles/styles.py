@@ -109,6 +109,53 @@ class Back_to_the_list_Button (ft.ElevatedButton):
             width=200,
         )
 
+#? Estilos de Tablas para Listas
+class List_tables(ft.DataTable):
+    def __init__(self, **kwargs):
+        super().__init__(
+            bgcolor= ft.Colors.TRANSPARENT,
+            #border= None,
+            border_radius= ft.border_radius.all(10),
+            #column_spacing= 10,
+            width= 1180,
+            **kwargs
+        )
+
+#? Botones de Editar
+class Edit_button(ft.IconButton):
+    def __init__(self, **kwargs):
+        super().__init__(
+            icon= ft.Icons.EDIT,
+            width= 50,
+            height= 50,
+            **kwargs
+        )
+
+#? Botones de Eliminar
+class delete_button(ft.IconButton):
+    def __init__(self, **kwargs):
+        super().__init__(
+            icon= ft.Icons.DELETE,
+            width= 50,
+            height= 50,
+            icon_color= ft.Colors.RED,
+            **kwargs
+        )
+
+#? Estilod de container 2
+class ContainerAction(ft.Container):
+    def __init__(self, **kwargs):
+        super().__init__(
+            # bgcolor= "#FFFFFF",
+            # border_radius= ft.border_radius.all(10),
+            # border= ft.border.all(2, "#FFFFFF"),
+            # padding=ft.padding.all(10),
+            # height=60,
+            # width=80,
+            alignment= ft.alignment.top_center,
+            **kwargs
+        )
+
 #! Estilos
 
 #? Estilo de Boton Primario
@@ -149,7 +196,7 @@ Page_Title = ft.TextStyle(
 Page_Subtitle = ft.TextStyle(
     color= ft.Colors.BLACK,
     weight= ft.FontWeight.W_700,
-    size= 20,
+    size= 22,
     )
 
 #? Estilo de Texto para Valor de Container en pagina Dashboard

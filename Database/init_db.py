@@ -30,11 +30,12 @@ with open(variables_path, 'r', encoding='utf-8') as file:
 ROUTERS = data.get('ROUTERS', [])
 PARENT = data.get('PARENT', [])
 PLANES = data.get('PLANES', [])
+ADMIN = data.get('ADMIN', [])
 
 #! Funciones
 
 #? Estableciendo Conexion con Base de datos
-def init_db(HOST, PORT, DBNAME, USER, PASSWORD, ROUTERS, PARENT, PLANES):
+def init_db(HOST, PORT, DBNAME, USER, PASSWORD, ROUTERS, PARENT, PLANES, ADMIN):
     #* Establecer conexion con base de datos si ya estta creada
     try:
         conn = ps.connect(
@@ -46,7 +47,7 @@ def init_db(HOST, PORT, DBNAME, USER, PASSWORD, ROUTERS, PARENT, PLANES):
         )
         
         create_tables(conn)
-        initial_data(conn, ROUTERS, PARENT, PLANES)
+        initial_data(conn, ROUTERS, PARENT, PLANES, ADMIN)
     
     #* Crear Base de datos 
     except UnicodeDecodeError:
@@ -121,7 +122,7 @@ def create_tables(conn):
     psql.close()
 
 #? Carga inicial de datos
-def initial_data(conn, ROUTERS, PARENT, PLANES):
+def initial_data(conn, ROUTERS, PARENT, PLANES, ADMIN):
     try:
         psql = conn.cursor()
         psql.execute("SELECT 1 FROM router LIMIT 1;")
@@ -187,6 +188,29 @@ def initial_data(conn, ROUTERS, PARENT, PLANES):
 
         else:
             print("Datos de queue ya insertados")
+
+        psql.execute("SELECT 1 FROM users LIMIT 1;")
+        Validation_users = psql.fetchone()
+
+        if Validation_users is None:
+            for admin in ADMIN:
+                psql.execute(
+                    "INSERT INTO users (username, email, name, last_name, password, confirm_password, privileges) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                    (
+                        admin["username"],
+                        admin["email"],
+                        admin["name"],
+                        admin["last_name"],
+                        admin["password"],
+                        admin["Confirmation"],
+                        admin["Privileges"]
+                    )
+                )
+            conn.commit()
+            print("Datos de Admin cargados")
+
+        else:
+            print("Datos de Admin ya insertados")
         
         psql.close()
 
@@ -194,4 +218,4 @@ def initial_data(conn, ROUTERS, PARENT, PLANES):
         print('Datos Iniciales no fueron cargados')
 
 if __name__ == "__main__":
-    init_db(HOST, PORT, DBNAME, USER, PASSWORD, ROUTERS, PARENT, PLANES)
+    init_db(HOST, PORT, DBNAME, USER, PASSWORD, ROUTERS, PARENT, PLANES, ADMIN)
