@@ -11,6 +11,7 @@ sys.path.insert(0, app_root)
 import flet as ft
 from Styles import styles
 from Objects import Navigation_Bar
+from Objects.Global_Function import require_auth
 
 #! Pagina de Dashboard
 def Dashboard(page: ft.Page):
@@ -27,6 +28,10 @@ def Dashboard(page: ft.Page):
     page.theme = ft.Theme(font_family="Inter")
     page.title = "MKQueue - Dashboard"
     page.padding = ft.padding.all(0)
+    
+    #? Verificar autenticación
+    if not require_auth(page):
+        return
     
     #* Controles de la pagina
 

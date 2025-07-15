@@ -11,7 +11,8 @@ sys.path.insert(0, app_root)
 import flet as ft
 from Objects import Navigation_Bar
 from Styles import styles
-from Objects.Global_Function import navigate_to_add_new_user
+from Objects.Global_Function import navigate_to_add_new_user, get_active_user_data, require_auth
+from Objects.Settings_Function import ViewUser, EditUserFuction, DeleteUserFunction
 
 #! Pagina de Configuraciones
 def Settings(page: ft.Page):
@@ -31,50 +32,63 @@ def Settings(page: ft.Page):
 
     #* Controles de la pagina
 
+    #? Verificar autenticación y obtener datos del usuario activo
+    if not require_auth(page):
+        return
+    
+    active_user = get_active_user_data(page)
+    # Después de require_auth, active_user no debería ser None
+    assert active_user is not None, "Usuario activo no encontrado después de la autenticación"
+    
     #? Controles del Formulario de Datos usuario actual
     #Usuario
     Username = styles.Settings_textfield(
         label= "Username",
+        disabled= True,
+        value= active_user["username"]
     )
     #Email
     Email = styles.Settings_textfield(
         label= "Email",
+        disabled= True,
+        value= active_user["email"]
     )
     #Nombres
     Names = styles.Settings_textfield(
         label= "Name",
+        disabled= True,
+        value= active_user["name"]
     )
     #Apellidos
     Last_Name = styles.Settings_textfield(
         label= "Last Name",
-    )
-    Privileges = styles.DropDown(
-        label= "Privilegios"
+        disabled= True,
+        value= active_user["last_name"]
     )
 
     #Boton para cambiar contraseña
-    Change_Password= ft.ElevatedButton(
-        style= styles.Secundary_Button,
-        text="Change Password",
-        height=60,
-        width=160
-    )
+    # Change_Password= ft.ElevatedButton(
+    #     style= styles.Secundary_Button,
+    #     text="Change Password",
+    #     height=60,
+    #     width=160
+    # )
     
-    #Boton para cancelar edicion
-    Cancel_Edit = ft.ElevatedButton(
-        style= styles.Secundary_Button,
-        text= "Cancel",
-        height=60,
-        width=160 
-    )
+    # #Boton para cancelar edicion
+    # Cancel_Edit = ft.ElevatedButton(
+    #     style= styles.Secundary_Button,
+    #     text= "Cancel",
+    #     height=60,
+    #     width=160 
+    # )
 
-    #Boton para guardar cambios
-    Save_Change = ft.ElevatedButton(
-        style=styles.Primary_Button,
-        text= "Save Change",
-        height=60,
-        width=840
-    )
+    # #Boton para guardar cambios
+    # Save_Change = ft.ElevatedButton(
+    #     style=styles.Primary_Button,
+    #     text= "Save Change",
+    #     height=60,
+    #     width=840
+    # )
 
     #? Contenedor para formulario de Datos de Usuario Actual
     Current_User_Data_Container = styles.ContainerStyle(
@@ -85,8 +99,7 @@ def Settings(page: ft.Page):
             Email,
             Names,
             Last_Name,
-            Privileges,
-            ft.Row([Change_Password,Cancel_Edit,Save_Change])
+            #ft.Row([Change_Password,Cancel_Edit,Save_Change])
         ]
 
         )
@@ -101,16 +114,29 @@ def Settings(page: ft.Page):
         icon= ft.Icons.ADD
     )
     New_User_Button.on_click = lambda e: navigate_to_add_new_user(page)
+
+    #? Lista de Usuarios
+    User_List = styles.List_tables(
+        columns=[
+            ft.DataColumn(ft.Text(style=styles.Page_header3, value="Username")),
+            ft.DataColumn(ft.Text(style=styles.Page_header3, value="Email")),
+            ft.DataColumn(ft.Text(style=styles.Page_header3, value="Name")),
+            ft.DataColumn(ft.Text(style=styles.Page_header3, value="Last Name")),
+            ft.DataColumn(ft.Text(style=styles.Page_header3, value="Actions"))
+        ]
+    )
     
     #? Contenedor de formulario lista de Usuarios
     User_List_Container = styles.ContainerStyle(
         width= 1200,
-        height=300,
+        height=430,
         content= ft.Column(
             [
                 ft.Text("User List", style=styles.Page_Subtitle),
-                ft.Divider(height=10, color=ft.Colors.TRANSPARENT),
+                #ft.Divider(height=10, color=ft.Colors.TRANSPARENT),
                 New_User_Button,
+                #ft.Divider(height=10, color=ft.Colors.TRANSPARENT),
+                ft.Column([User_List],height=300,scroll=ft.ScrollMode.AUTO)
             ],
             horizontal_alignment= ft.CrossAxisAlignment.CENTER
         )
@@ -118,6 +144,7 @@ def Settings(page: ft.Page):
 
     #* Limpieza de la Pagina y adición de controles
     page.clean()
+    ViewUser(page, User_List, EditUserFuction, DeleteUserFunction)
     page.add(
         ft.Row(
             controls=[

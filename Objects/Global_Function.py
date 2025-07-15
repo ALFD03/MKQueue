@@ -31,7 +31,7 @@ def Authentication(page, Username, Password):
     conn = Connect_db()
     psql = conn.cursor()
     psql.execute(
-        "SELECT username FROM users WHERE username = %s AND password = %s LIMIT 1",
+        "SELECT username, email, name, last_name FROM users WHERE username = %s AND password = %s LIMIT 1",
         (
             Username,
             Password
@@ -40,8 +40,19 @@ def Authentication(page, Username, Password):
     validation = psql.fetchone()
 
     if validation is None:
+        psql.close()
+        conn.close()
         page.open(ft.SnackBar(ft.Text("Credenciales incorrectas.")))
     else:
+        # Guardar datos del usuario activo en la página
+        page.user_data = {
+            "username": validation[0],
+            "email": validation[1],
+            "name": validation[2],
+            "last_name": validation[3]
+        }
+        psql.close()
+        conn.close()
         navigate_to_dashboard(page)
 
 #? Navegacion to Dashboard
@@ -83,6 +94,22 @@ def navigate_to_add_new_router(page):
 def navigate_to_add_new_queue_tree(page):
     from Pages.Sub_Pages.Add_Queue_tree import Add_Queue_tree
     Add_Queue_tree(page)
+
+#? Obtener datos del usuario activo
+def get_active_user_data(page):
+    """Obtiene los datos del usuario activo desde la página"""
+    if hasattr(page, 'user_data'):
+        return page.user_data
+    return None
+
+#? Verificar si el usuario está autenticado
+def require_auth(page):
+    """Verifica si el usuario está autenticado, si no, redirige al login"""
+    if not get_active_user_data(page):
+        from Pages.Login import Login
+        Login(page)
+        return False
+    return True
 
 #! Eventos
 

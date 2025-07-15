@@ -11,7 +11,7 @@ sys.path.insert(0, app_root)
 import flet as ft
 from Objects import Navigation_Bar
 from Styles import styles
-from Objects.Global_Function import navigate_to_add_new_router
+from Objects.Global_Function import navigate_to_add_new_router, require_auth
 from Objects.Router_Function import ViewRouter, EditRouterFunction, DeleteRouterFunction
 
 #! Pagina de Router
@@ -29,6 +29,10 @@ def Router(page: ft.Page):
     page.theme = ft.Theme(font_family="Inter")
     page.title = "MKQueue - Router"
     page.padding = ft.padding.all(0)
+
+    #? Verificar autenticación
+    if not require_auth(page):
+        return
 
     #* Controles de la pagina
 

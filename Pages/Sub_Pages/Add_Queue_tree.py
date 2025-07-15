@@ -26,7 +26,7 @@ def ValAddQueueTree(page, queuetree_name, queuetree_router, queuetree_parent, sp
                 page.open(ft.SnackBar(ft.Text("La velocidad no es correcta")))
 
             try:
-                AddQueueTree(queuetree_name, queuetree_router, queuetree_parent, speed, download_queue, upload_queue)
+                AddQueueTree(page, queuetree_name, queuetree_router, queuetree_parent, speed, download_queue, upload_queue)
                 page.open(ft.SnackBar(ft.Text("La cola fue cargado exitosamente.")))
 
             except ps.errors.UniqueViolation:
@@ -70,13 +70,15 @@ def Add_Queue_tree(page: ft.Page):
     #Seleccion de router
     router = styles.DropDown(
         label= "Router",
-        on_change= lambda e: ListParent(page, Parent, router.value)
+        on_change= lambda e: ListParent(page, Parent, router.value),
+        width=1200,
     )
 
     #Pariente
     Parent = styles.DropDown(
         label= "Parent",
         disabled=True,
+        width=1200,
         
     )
 

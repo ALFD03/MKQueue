@@ -81,7 +81,6 @@ class DropDown(ft.Dropdown):
             border_radius=ft.border_radius.all(10),
             border_color='#D3D0CB',
             border_width=0.5,
-            width=1200,
             label_style= ft.TextStyle(
                 color= ft.Colors.BLACK,
                 weight= ft.FontWeight.W_900,
@@ -198,6 +197,12 @@ Page_Subtitle = ft.TextStyle(
     weight= ft.FontWeight.W_700,
     size= 22,
     )
+
+Page_header3 = ft.TextStyle(
+    color= ft.Colors.BLACK,
+    weight= ft.FontWeight.W_700,
+    size= 18,
+)
 
 #? Estilo de Texto para Valor de Container en pagina Dashboard
 Values_Style = ft.TextStyle(

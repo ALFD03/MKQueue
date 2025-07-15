@@ -15,11 +15,11 @@ from Objects import Navigation_Bar
 from Objects.Global_Function import clear_controls, navigate_to_settings
 from Objects.Settings_Function import AddNewUser
 
-def ValAddNewUser(page, Username, Email, Name, Last_Name, Password, Confirm_Password, Privileges):
-    if all([Username, Email, Name, Last_Name, Password, Confirm_Password, Privileges]):
+def ValAddNewUser(page, Username, Email, Name, Last_Name, Password, Confirm_Password):
+    if all([Username, Email, Name, Last_Name, Password, Confirm_Password]):
         if Password == Confirm_Password:
             try:
-                AddNewUser(Username, Email, Name, Last_Name, Password, Confirm_Password, Privileges)
+                AddNewUser(page, Username, Email, Name, Last_Name, Password, Confirm_Password)
                 page.open(ft.SnackBar(ft.Text("El usuario fue cargado exitosamente.")))
 
             except ps.errors.UniqueViolation:
@@ -87,15 +87,6 @@ def Add_New_User(page: ft.Page):
         label= "Confirm Password"
     )
 
-    #Privilegios del Usuario
-    Privileges = styles.DropDown(
-        label= "Privileges",
-        options= [
-            ft.DropdownOption(1,"Administrator"),
-            ft.DropdownOption(0,"Viewer"),
-        ],
-    )
-
     #Limpieza de Fomulario
     clear= ft.ElevatedButton(
         text= "Clear",
@@ -112,7 +103,7 @@ def Add_New_User(page: ft.Page):
         height= 60,
         icon= ft.Icons.ADD,
         style= styles.Primary_Button,
-        on_click= lambda e: ValAddNewUser(page, Username.value,Email.value,Name.value,Last_name.value,Password.value,Confirm_Password.value,Privileges.value)
+        on_click= lambda e: ValAddNewUser(page, Username.value,Email.value,Name.value,Last_name.value,Password.value,Confirm_Password.value)
 
     )
 
@@ -128,7 +119,6 @@ def Add_New_User(page: ft.Page):
                 Last_name,
                 Password,
                 Confirm_Password,
-                Privileges,
                 ft.Row([clear,Save])
             ],
             horizontal_alignment=ft.CrossAxisAlignment.CENTER

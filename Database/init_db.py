@@ -87,8 +87,7 @@ def create_tables(conn):
                     name VARCHAR(255) NOT NULL,
                     last_name VARCHAR(255),
                     password VARCHAR(255) NOT NULL,
-                    confirm_password VARCHAR(255) NOT NULL,
-                    privileges INT NOT NULL
+                    confirm_password VARCHAR(255) NOT NULL
                 );
                 
                 CREATE TABLE IF NOT EXISTS router(
@@ -195,15 +194,14 @@ def initial_data(conn, ROUTERS, PARENT, PLANES, ADMIN):
         if Validation_users is None:
             for admin in ADMIN:
                 psql.execute(
-                    "INSERT INTO users (username, email, name, last_name, password, confirm_password, privileges) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                    "INSERT INTO users (username, email, name, last_name, password, confirm_password) VALUES (%s, %s, %s, %s, %s, %s)",
                     (
                         admin["username"],
                         admin["email"],
                         admin["name"],
                         admin["last_name"],
                         admin["password"],
-                        admin["Confirmation"],
-                        admin["Privileges"]
+                        admin["Confirmation"]
                     )
                 )
             conn.commit()

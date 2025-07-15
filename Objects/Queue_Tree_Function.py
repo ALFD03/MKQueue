@@ -17,6 +17,7 @@ import flet as ft
 import psycopg2 as ps
 from Styles import styles
 from Database.querys import Connect_db
+from Objects.Global_Function import navigate_to_queue_tree
 from Objects import Global_Function
 from Objects import Queue_Tree_Function
 from Objects import Router_Function
@@ -47,7 +48,7 @@ def ListParent(page, DropDown, router):
     page.update()
 
 #? Funcion para agregar queue trees
-def AddQueueTree(queuetree_name, queuetree_router, queuetree_parent, speed, download_queue, upload_queue):
+def AddQueueTree(page, queuetree_name, queuetree_router, queuetree_parent, speed, download_queue, upload_queue):
     conn = Connect_db()
     psql = conn.cursor()
     psql.execute(
@@ -64,6 +65,7 @@ def AddQueueTree(queuetree_name, queuetree_router, queuetree_parent, speed, down
     conn.commit()
     psql.close()
     conn.close()
+    navigate_to_queue_tree(page)
 
 #? Funcion para listar Queue Tree
 def ViewQueue(page, DataTable, Edit_Queue_Function, Delete_Queue_Function):
@@ -132,8 +134,8 @@ def EditQueueFunction(page, idqueue, qname, qrouter, qparent, qspeed, dqueue, uq
         Global_Function.navigate_to_queue_tree(page)
 
     Txtf_qname = styles.Login_textfield(label= "Queue Name", value= qname)
-    Txtf_qrouter = styles.DropDown(label= "Router", value= qrouter, on_change= lambda e: Queue_Tree_Function.ListParent(page, Txtf_qparent, Txtf_qrouter.value))
-    Txtf_qparent = styles.DropDown(label= "Parent", value= qparent)
+    Txtf_qrouter = styles.DropDown(width= 300,label= "Router", value= qrouter, on_change= lambda e: Queue_Tree_Function.ListParent(page, Txtf_qparent, Txtf_qrouter.value))
+    Txtf_qparent = styles.DropDown(width= 300,label= "Parent", value= qparent)
     Txtf_qspeed = styles.Login_textfield(label= "Speed", value= qspeed)
     Txtf_dqueue = styles.Login_textfield(label= "Download Queue", value= dqueue)
     Txtf_uqueue = styles.Login_textfield(label= "Upload Queue", value= uqueue)
@@ -164,7 +166,7 @@ def EditQueueFunction(page, idqueue, qname, qrouter, qparent, qspeed, dqueue, uq
             Txtf_dqueue,
             Txtf_uqueue
         ],
-        height=300
+        height=350
         ),
         actions_alignment= ft.MainAxisAlignment.END,
         actions= [

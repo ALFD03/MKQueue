@@ -26,7 +26,7 @@ def ValAddRouter(page, Name, router, User, Password, Port):
         ip.IPv4Address(router)
         if all([Name, router, User, Password, Port]):
             try:
-                AddRouter(Name, router, User, Password, Port)
+                AddRouter(page, Name, router, User, Password, Port)
                 page.open(ft.SnackBar(ft.Text("El router fue cargado exitosamente.")))
 
             except ps.errors.UniqueViolation:

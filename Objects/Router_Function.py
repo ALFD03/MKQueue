@@ -21,7 +21,7 @@ from Objects.Global_Function import navigate_to_router
 #! Eventos
 
 #? Funcion para agregar router
-def AddRouter (router_name, router_ip, router_user, router_password, router_port):
+def AddRouter (page, router_name, router_ip, router_user, router_password, router_port):
     conn = Connect_db()
     psql = conn.cursor()
     psql.execute(
@@ -37,6 +37,7 @@ def AddRouter (router_name, router_ip, router_user, router_password, router_port
     conn.commit()
     psql.close()
     conn.close()
+    navigate_to_router(page)
 
 
 #? Funcion para listar routers

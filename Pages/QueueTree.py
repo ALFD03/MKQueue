@@ -11,7 +11,7 @@ sys.path.insert(0, app_root)
 import flet as ft
 from Objects import Navigation_Bar
 from Styles import styles
-from Objects.Global_Function import navigate_to_add_new_queue_tree
+from Objects.Global_Function import navigate_to_add_new_queue_tree, require_auth
 from Objects.Queue_Tree_Function import ViewQueue, EditQueueFunction, DeleteQueueFunction
 
 #! Pagina del Arbol de Colas
@@ -29,6 +29,10 @@ def QueueTree(page: ft.Page):
     page.theme = ft.Theme(font_family="Inter")
     page.title = "MKQueue - Queue Tree"
     page.padding = ft.padding.all(0)
+
+    #? Verificar autenticación
+    if not require_auth(page):
+        return
 
     #* Controles de la pagina
 
