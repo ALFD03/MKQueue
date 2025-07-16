@@ -206,8 +206,8 @@ Page_header3 = ft.TextStyle(
 
 #? Estilo de Texto para Valor de Container en pagina Dashboard
 Values_Style = ft.TextStyle(
-    color= ft.Colors.BLACK,
-    size= 20,
+    color= '#1098f7',
+    size= 28,
     weight= ft.FontWeight.W_800,
 )
 

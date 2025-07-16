@@ -75,7 +75,7 @@ def init_db(HOST, PORT, DBNAME, USER, PASSWORD, ROUTERS, PARENT, PLANES, ADMIN):
         )
 
         create_tables(conn)
-        initial_data(conn, ROUTERS, PARENT, PLANES)
+        initial_data(conn, ROUTERS, PARENT, PLANES, ADMIN)
 
 #? Creacion de tablas en la base de datos
 def create_tables(conn):

@@ -205,3 +205,4 @@ def DeleteQueueFunction(page, idqueue):
     )
 
     page.open(confirmation_Dialog)
+

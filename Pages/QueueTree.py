@@ -11,7 +11,7 @@ sys.path.insert(0, app_root)
 import flet as ft
 from Objects import Navigation_Bar
 from Styles import styles
-from Objects.Global_Function import navigate_to_add_new_queue_tree, require_auth
+from Objects.Global_Function import navigate_to_add_new_queue_tree, navigate_to_load_file, require_auth
 from Objects.Queue_Tree_Function import ViewQueue, EditQueueFunction, DeleteQueueFunction
 
 #! Pagina del Arbol de Colas
@@ -45,6 +45,7 @@ def QueueTree(page: ft.Page):
         icon= ft.Icons.FOLDER,
         icon_color= ft.Colors.WHITE,
     )
+    Load_File_Button.on_click = lambda e: navigate_to_load_file(page)
 
     #? Boton para Sincronizar con el Router
     # Sync_Router_Button = ft.ElevatedButton(

@@ -37,15 +37,15 @@ def Router(page: ft.Page):
     #* Controles de la pagina
 
     #? Boton para agregar un router
-    Add_New_Router = ft.ElevatedButton(
-        style=styles.Primary_Button,
-        text= "Add New Router",
-        width= 160,
-        height= 60,
-        icon= ft.Icons.ADD,
-        icon_color= ft.Colors.WHITE,
-    )
-    Add_New_Router.on_click = lambda e: navigate_to_add_new_router(page)
+    # Add_New_Router = ft.ElevatedButton(
+    #     style=styles.Primary_Button,
+    #     text= "Add New Router",
+    #     width= 160,
+    #     height= 60,
+    #     icon= ft.Icons.ADD,
+    #     icon_color= ft.Colors.WHITE,
+    # )
+    # Add_New_Router.on_click = lambda e: navigate_to_add_new_router(page)
     
     #? Lista de Routers
     Router_List = styles.List_tables(
@@ -96,7 +96,7 @@ def Router(page: ft.Page):
                             controls=[
                                 ft.Text("Router Management",style=styles.Page_Title, width= 200),
                                 ft.VerticalDivider(width=808, color= ft.Colors.TRANSPARENT),
-                                Add_New_Router,
+                                #Add_New_Router,
                             ],
                         ),
                         ft.Row(height=20),

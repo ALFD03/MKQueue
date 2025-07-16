@@ -95,6 +95,11 @@ def navigate_to_add_new_queue_tree(page):
     from Pages.Sub_Pages.Add_Queue_tree import Add_Queue_tree
     Add_Queue_tree(page)
 
+#? Navegacion to Load File
+def navigate_to_load_file(page):
+    from Pages.load_file import Load_File
+    Load_File(page)
+
 #? Obtener datos del usuario activo
 def get_active_user_data(page):
     """Obtiene los datos del usuario activo desde la página"""

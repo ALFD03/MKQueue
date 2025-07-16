@@ -11,7 +11,7 @@ sys.path.insert(0, app_root)
 import flet as ft
 from Styles import styles
 from Objects import Navigation_Bar
-from Objects.Global_Function import require_auth
+from Objects.Global_Function import require_auth, navigate_to_load_file, navigate_to_add_new_queue_tree
 
 #! Pagina de Dashboard
 def Dashboard(page: ft.Page):
@@ -77,17 +77,61 @@ def Dashboard(page: ft.Page):
             )
     )
 
-    #? Conetendor para la Grafica de tendencia en WAN
-    Traffic_WAN = styles.ContainerStyle(
+    #* Obtener cantidad de queue trees y routers
+    import psycopg2 as ps
+    from Database.querys import Connect_db
+    conn = Connect_db()
+    psql = conn.cursor()
+    psql.execute("SELECT COUNT(*) FROM queue_tree")
+    queue_tree_result = psql.fetchone()
+    queue_tree_count = queue_tree_result[0] if queue_tree_result else 0
+    psql.execute("SELECT COUNT(*) FROM router")
+    router_result = psql.fetchone()
+    router_count = router_result[0] if router_result else 0
+    psql.close()
+    conn.close()
+    Value_Active_QueueTree.value = str(queue_tree_count)
+    Value_Active_Router.value = str(router_count)
+
+    #* Obtener lista de parents
+    conn = Connect_db()
+    psql = conn.cursor()
+    psql.execute("SELECT parent_name FROM parent LIMIT 10")
+    parent_names = [row[0] for row in psql.fetchall()]
+    psql.close()
+    conn.close()
+
+    #? Contenedor para acciones rápidas
+    QuickActions_Container = styles.ContainerStyle(
         content=ft.Column(
             [
-                ft.Divider(height=10, color= ft.Colors.TRANSPARENT),
-                ft.Text("Traffic WAN", style=styles.Page_Subtitle,),
+                ft.Text("Acciones rápidas", style=styles.Page_Subtitle),
+                ft.Row([
+                    ft.ElevatedButton(
+                        text="Cargar archivo",
+                        icon=ft.Icons.UPLOAD_FILE,
+                        style=styles.Primary_Button,
+                        on_click=lambda e: require_auth(page) and navigate_to_load_file(page)
+                    ),
+                    ft.ElevatedButton(
+                        text="Agregar Queue Tree",
+                        icon=ft.Icons.ADD,
+                        style=styles.Primary_Button,
+                        on_click=lambda e: require_auth(page) and navigate_to_add_new_queue_tree(page)
+                    ),
+                ], spacing=20),
+                ft.Divider(height=10, color=ft.Colors.TRANSPARENT),
+                ft.Text("Parents registrados", style=styles.Page_Subtitle),
+                ft.ListView([
+                    ft.ListTile(title=ft.Text(name)) for name in parent_names
+                ], height=220, width=400)
             ],
-            width= 1190,
-            height= 450,
+            width=600,
+            height=360,
             horizontal_alignment=ft.CrossAxisAlignment.CENTER
-        )
+        ),
+        width=600,
+        height=360,
     )
 
     #* Limpieza de la Pagina y adición de controles
@@ -121,7 +165,7 @@ def Dashboard(page: ft.Page):
                         ft.Row(height= 20),
                         ft.Row(
                             [
-                                Traffic_WAN,
+                                QuickActions_Container,
                             ]
                         ),
                     ]
