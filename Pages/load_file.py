@@ -90,14 +90,14 @@ def Load_File(page: ft.Page):
     #? Tabla de vista previa con cálculos
     Preview_Table = ft.DataTable(
         columns=[
-            ft.DataColumn(ft.Container(ft.Text("Queue Name", text_align=ft.TextAlign.CENTER), width=320)),
-            ft.DataColumn(ft.Container(ft.Text("Router", text_align=ft.TextAlign.CENTER), width=120)),
-            ft.DataColumn(ft.Container(ft.Text("Parent", text_align=ft.TextAlign.CENTER), width=300)),
-            ft.DataColumn(ft.Container(ft.Text("Velocidad Plan", text_align=ft.TextAlign.CENTER), width=120)),
-            ft.DataColumn(ft.Container(ft.Text("Clientes", text_align=ft.TextAlign.CENTER), width=80)),
-            ft.DataColumn(ft.Container(ft.Text("Factor Rebanado", text_align=ft.TextAlign.CENTER), width=100)),
-            ft.DataColumn(ft.Container(ft.Text("MIR", text_align=ft.TextAlign.CENTER), width=120)),
-            ft.DataColumn(ft.Container(ft.Text("CIR", text_align=ft.TextAlign.CENTER), width=120)),
+            ft.DataColumn(ft.Container(ft.Text("Queue Name", text_align=ft.TextAlign.CENTER), width=300)),
+            ft.DataColumn(ft.Container(ft.Text("Router", text_align=ft.TextAlign.CENTER), width=100)),
+            ft.DataColumn(ft.Container(ft.Text("Parent", text_align=ft.TextAlign.CENTER), width=280)),
+            ft.DataColumn(ft.Container(ft.Text("Velocidad Plan", text_align=ft.TextAlign.CENTER), width=100)),
+            ft.DataColumn(ft.Container(ft.Text("Clientes", text_align=ft.TextAlign.CENTER), width=60)),
+            ft.DataColumn(ft.Container(ft.Text("Factor Rebanado", text_align=ft.TextAlign.CENTER), width=80)),
+            ft.DataColumn(ft.Container(ft.Text("MIR", text_align=ft.TextAlign.CENTER), width=100)),
+            ft.DataColumn(ft.Container(ft.Text("CIR", text_align=ft.TextAlign.CENTER), width=100)),
         ],
         rows=[],
         column_spacing=5,
@@ -114,15 +114,15 @@ def Load_File(page: ft.Page):
             ft.Row(
                 [Preview_Table],
                 scroll=ft.ScrollMode.ALWAYS,
-                width=600,
+                width=1190,
             )
         ],
         scroll=ft.ScrollMode.ALWAYS,
-        width=600,
-        height=540
+        width=1190,
+        height=400
         ),
-        width=600,
-        height=540,
+        width=1190,
+        height=400,
     )
 
     #* Tabla de Parents
@@ -149,15 +149,15 @@ def Load_File(page: ft.Page):
             ft.Row(
                 [Parent_Table],
                 scroll=ft.ScrollMode.ALWAYS,
-                width=600,
+                width=780,
             )
         ],
         scroll=ft.ScrollMode.ALWAYS,
-        width=600,
-        height=540
+        width=780,
+        height=400
         ),
-        width=600,
-        height=540,
+        width=780,
+        height=400,
     )
 
     #* Funciones de manejo de eventos
@@ -215,14 +215,14 @@ def Load_File(page: ft.Page):
                         Preview_Table.rows.append(
                             ft.DataRow(
                                 cells=[
-                                    ft.DataCell(ft.Container(ft.Text(str(queue_name)), width=220, padding=ft.Padding(0, 12, 0, 12))),
-                                    ft.DataCell(ft.Container(ft.Text(str(router)), width=120, padding=ft.Padding(0, 12, 0, 12))),
-                                    ft.DataCell(ft.Container(ft.Text(str(parent)), width=300, padding=ft.Padding(0, 12, 0, 12))),
-                                    ft.DataCell(ft.Container(ft.Text(f"{int(round(velocidad))} Mbps"), width=120, padding=ft.Padding(0, 12, 0, 12))),
-                                    ft.DataCell(ft.Container(ft.Text(str(row['CLIENTES'])), width=80, padding=ft.Padding(0, 12, 0, 12))),
-                                    ft.DataCell(ft.Container(ft.Text(str(row['FACTOR_REBANADO'])), width=100, padding=ft.Padding(0, 12, 0, 12))),
-                                    ft.DataCell(ft.Container(ft.Text(f"{int(round(row['MIR_DOWNLOAD']))} Mbps"), width=120, padding=ft.Padding(0, 12, 0, 12))),
-                                    ft.DataCell(ft.Container(ft.Text(f"{int(round(row['CIR_DOWNLOAD']))} Mbps"), width=120, padding=ft.Padding(0, 12, 0, 12))),
+                                    ft.DataCell(ft.Container(ft.Text(str(queue_name)), width=200, padding=ft.Padding(0, 12, 0, 12))),
+                                    ft.DataCell(ft.Container(ft.Text(str(router)), width=100, padding=ft.Padding(0, 12, 0, 12))),
+                                    ft.DataCell(ft.Container(ft.Text(str(parent)), width=280, padding=ft.Padding(0, 12, 0, 12))),
+                                    ft.DataCell(ft.Container(ft.Text(f"{int(round(velocidad))} Mbps"), width=100, padding=ft.Padding(0, 12, 0, 12))),
+                                    ft.DataCell(ft.Container(ft.Text(str(row['CLIENTES'])), width=60, padding=ft.Padding(0, 12, 0, 12))),
+                                    ft.DataCell(ft.Container(ft.Text(str(row['FACTOR_REBANADO'])), width=80, padding=ft.Padding(0, 12, 0, 12))),
+                                    ft.DataCell(ft.Container(ft.Text(f"{int(round(row['MIR_DOWNLOAD']))} Mbps"), width=100, padding=ft.Padding(0, 12, 0, 12))),
+                                    ft.DataCell(ft.Container(ft.Text(f"{int(round(row['CIR_DOWNLOAD']))} Mbps"), width=100, padding=ft.Padding(0, 12, 0, 12))),
                                 ]
                             )
                         )
@@ -396,10 +396,10 @@ def Load_File(page: ft.Page):
                             ft.Row(height=10),
                             File_Info,
                             ft.Row(height=20),
-                            ft.Row([
-                                ft.Column([Preview_Container,],width=600),
-                                ft.Column([Parent_Container],width=600)
-                            ])
+                            ft.Column([
+                                ft.Row([Preview_Container,],width=1210),
+                                ft.Row([Parent_Container],width=1210)
+                            ],scroll= ft.ScrollMode.ALWAYS,height=400)
                         ]
                     )
                 ],
